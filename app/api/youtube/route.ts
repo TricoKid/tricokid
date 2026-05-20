@@ -1,12 +1,27 @@
 import { NextResponse } from "next/server";
 
-const API_KEY = "AIzaSyAzzeU2_nDimATFGqFkTFq_zrs0omKSyBI";
-const CHANNEL_ID = "UCMqD-FNgfhncfWibGB6czHA";
-
 export async function GET() {
   try {
+    const API_KEY = process.env.YOUTUBE_API_KEY;
+
+    // FIND CHANNEL USING HANDLE
+    const searchResponse = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=tricokidhere&key=${API_KEY}`
+    );
+
+    const searchData = await searchResponse.json();
+
+    const channelId = searchData.items?.[0]?.snippet?.channelId;
+
+    if (!channelId) {
+      return NextResponse.json({
+        error: "Channel not found",
+      });
+    }
+
+    // GET LATEST VIDEO
     const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&type=video`
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1`
     );
 
     const data = await response.json();
@@ -14,7 +29,7 @@ export async function GET() {
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({
-      error: "Failed to fetch YouTube videos",
+      error: "Failed to fetch videos",
     });
   }
 }
