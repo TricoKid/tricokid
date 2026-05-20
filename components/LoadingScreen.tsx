@@ -8,7 +8,7 @@ export default function LoadingScreen() {
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ delay: 2.2, duration: 1 }}
-      className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[9999] pointer-events-none bg-black flex items-center justify-center overflow-hidden"
     >
 
       {/* Background Glow */}
