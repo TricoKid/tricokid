@@ -1,5 +1,4 @@
 import HeroVideo from "@/components/HeroVideo";
-import HeroSection from "@/components/HeroSection";
 import SubCounter from "@/components/SubCounter";
 import YouTubeFeed from "@/components/YouTubeFeed";
 import Footer from "@/components/Footer";
