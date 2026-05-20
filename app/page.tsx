@@ -156,7 +156,7 @@ export default function Home() {
       </section>
 <section className="relative h-screen overflow-hidden">
   <HeroVideo />
-
+<div className="absolute inset-0 bg-black/40 z-[1]" />
   <div className="relative z-10 flex items-center justify-center h-full">
     <h1 className="text-white text-6xl font-bold">
       TRICOKID
