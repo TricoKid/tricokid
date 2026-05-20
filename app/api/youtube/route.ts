@@ -21,7 +21,7 @@ export async function GET() {
 
     // GET LATEST VIDEO
     const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1`
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=6`
     );
 
     const data = await response.json();
