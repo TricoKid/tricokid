@@ -1,3 +1,5 @@
+import HeroVideo from "@/components/HeroVideo";
+import HeroSection from "@/components/HeroSection";
 import SubCounter from "@/components/SubCounter";
 import YouTubeFeed from "@/components/YouTubeFeed";
 import Footer from "@/components/Footer";
@@ -153,6 +155,16 @@ export default function Home() {
           </div>
         </div>
       </section>
+<section className="relative h-screen overflow-hidden">
+  <HeroVideo />
+
+  <div className="relative z-10 flex items-center justify-center h-full">
+    <h1 className="text-white text-6xl font-bold">
+      TRICOKID
+    </h1>
+  </div>
+</section>
+<HeroVideo />
 <SubCounter />
 <YouTubeFeed />
 <VideoSection />
