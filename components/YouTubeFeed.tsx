@@ -29,6 +29,18 @@ export default function YouTubeFeed() {
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedVideo) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedVideo]);
+
   return (
     <section className="py-20 px-6 bg-black text-white relative z-10">
       <h2 className="text-5xl font-bold text-center mb-14">
@@ -78,7 +90,7 @@ export default function YouTubeFeed() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-[9999] flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[9999] flex items-center justify-center p-4 overflow-hidden"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -89,7 +101,7 @@ export default function YouTubeFeed() {
             >
               <button
                 onClick={() => setSelectedVideo(null)}
-                className="absolute -top-14 right-0 text-white text-5xl hover:text-yellow-400 transition"
+                className="absolute top-4 right-4 z-[10000] bg-black/70 w-14 h-14 rounded-full flex items-center justify-center text-white text-3xl hover:text-yellow-400 transition"
               >
                 ✕
               </button>
