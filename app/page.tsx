@@ -156,7 +156,6 @@ export default function Home() {
 <SubCounter />
 <YouTubeFeed />
 <VideoSection />
-<TrendingSection />
 <AboutSection />
 <Footer />
     </main>
