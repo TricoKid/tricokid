@@ -163,10 +163,10 @@ export default function Home() {
     </h1>
   </div>
 </section>
-<HeroVideo />
 <SubCounter />
 <YouTubeFeed />
 <VideoSection />
+<HeroVideo />
 <AboutSection />
 <Footer />
     </main>
