@@ -1,3 +1,4 @@
+import Reveal from "@/components/Reveal";
 import HeroVideo from "@/components/HeroVideo";
 import SubCounter from "@/components/SubCounter";
 import YouTubeFeed from "@/components/YouTubeFeed";
@@ -163,12 +164,24 @@ export default function Home() {
     </h1>
   </div>
 </section>
-<SubCounter />
-<YouTubeFeed />
-<VideoSection />
-<HeroVideo />
-<AboutSection />
-<Footer />
+<Reveal>
+  <SubCounter />
+</Reveal>
+<Reveal>
+  <YouTubeFeed />
+</Reveal>
+<Reveal>
+  <VideoSection />
+</Reveal>
+<Reveal>
+  <HeroVideo />
+</Reveal>
+<Reveal>
+  <AboutSection />
+</Reveal>
+<Reveal>
+  <Footer />
+</Reveal>
     </main>
   
   );
