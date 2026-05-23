@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaDiscord, FaInstagram, FaYoutube } from "react-icons/fa";
 
@@ -10,7 +11,33 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7 }}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10"
-    >
+    ><div className="flex gap-8 text-sm font-semibold">
+
+  <Link href="/">
+    <span className="hover:text-yellow-400 transition">
+      HOME
+    </span>
+  </Link>
+
+  <Link href="/videos">
+    <span className="hover:text-yellow-400 transition">
+      VIDEOS
+    </span>
+  </Link>
+
+  <Link href="/community">
+    <span className="hover:text-yellow-400 transition">
+      COMMUNITY
+    </span>
+  </Link>
+
+  <Link href="/interactives">
+    <span className="hover:text-yellow-400 transition">
+      INTERACTIVES
+    </span>
+  </Link>
+
+</div>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
         <div className="flex items-center gap-3">
