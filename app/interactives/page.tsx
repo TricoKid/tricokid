@@ -1,163 +1,184 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const questions = [
-  {
-    heading: "WHO IS MORE POPULAR?",
-    optionA: {
-      name: "Gojo",
-      image: "https://i.imgur.com/6VBx3io.jpg",
-    },
-    optionB: {
-      name: "Naruto",
-      image: "https://i.imgur.com/tXNdH7I.jpg",
-    },
-    answer: "Naruto",
-  },
+const categories = {
+  anime: [
+    "Naruto",
+    "Gojo",
+    "Luffy",
+    "Levi",
+    "Eren",
+    "Sukuna",
+    "Itachi",
+  ],
 
-  {
-    heading: "WHICH BIKE IS MORE ICONIC?",
-    optionA: {
-      name: "Hayabusa",
-      image: "https://i.imgur.com/FWZ6G1x.jpg",
-    },
-    optionB: {
-      name: "H2R",
-      image: "https://i.imgur.com/N9Koevq.jpg",
-    },
-    answer: "Hayabusa",
-  },
+  bikes: [
+    "Hayabusa",
+    "H2R",
+    "Duke 390",
+    "R1",
+    "ZX10R",
+    "BMW S1000RR",
+  ],
 
-  {
-    heading: "WHO IS MORE FAMOUS?",
-    optionA: {
-      name: "Mohanlal",
-      image: "https://i.imgur.com/U6LwS4m.jpg",
-    },
-    optionB: {
-      name: "Mammootty",
-      image: "https://i.imgur.com/5hmdG4x.jpg",
-    },
-    answer: "Mohanlal",
-  },
-];
+  celebrities: [
+    "Mohanlal",
+    "Mammootty",
+    "Messi",
+    "Ronaldo",
+    "MrBeast",
+    "IShowSpeed",
+  ],
+};
+
+function getRandomCategory() {
+  const keys = Object.keys(categories);
+  return keys[Math.floor(Math.random() * keys.length)];
+}
+
+function getRandomBattle() {
+
+  const category = getRandomCategory();
+
+  const items =
+    categories[category as keyof typeof categories];
+
+  const shuffled = [...items].sort(
+    () => Math.random() - 0.5
+  );
+
+  return {
+    heading: "WHO WINS?",
+    optionA: shuffled[0],
+    optionB: shuffled[1],
+    answer:
+      shuffled[Math.floor(Math.random() * 2)],
+  };
+}
 
 export default function InteractivesPage() {
 
-  const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState("");
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [battle, setBattle] = useState<any>(null);
 
-  const question = questions[current];
+  const [selected, setSelected] = useState("");
+
+  const [correct, setCorrect] = useState<boolean | null>(
+    null
+  );
+
+  const generateBattle = () => {
+    setBattle(getRandomBattle());
+    setSelected("");
+    setCorrect(null);
+  };
+
+  useEffect(() => {
+    generateBattle();
+  }, []);
+
+  if (!battle) return null;
 
   const handleChoice = (choice: string) => {
 
     if (selected) return;
 
-    const correct = choice === question.answer;
+    const isRight = choice === battle.answer;
 
     setSelected(choice);
-    setIsCorrect(correct);
+    setCorrect(isRight);
 
     setTimeout(() => {
-
-      setSelected("");
-      setIsCorrect(null);
-
-      if (current < questions.length - 1) {
-        setCurrent(current + 1);
-      } else {
-        setCurrent(0);
-      }
-
-    }, 1000);
+      generateBattle();
+    }, 1200);
   };
 
   return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center px-4 overflow-hidden">
+    <main className="min-h-screen bg-black text-white flex items-center justify-center px-6 overflow-hidden">
 
+      {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900 via-black to-black" />
+
+      <div className="absolute w-[500px] h-[500px] bg-yellow-500/10 blur-[150px] rounded-full top-20 left-1/2 -translate-x-1/2" />
 
       <div className="relative z-10 w-full max-w-6xl">
 
-        <h1 className="text-center text-yellow-400 tracking-[0.3em] text-sm mb-6">
-          TRICOVERSE INTERACTIVE
+        {/* TITLE */}
+        <h1 className="text-center text-yellow-400 tracking-[0.4em] text-sm mb-4">
+          TRICOVERSE BATTLE
         </h1>
 
-        <h2 className="text-center text-4xl md:text-6xl font-black mb-12">
-          {question.heading}
+        <h2 className="text-center text-5xl md:text-7xl font-black mb-14">
+          {battle.heading}
         </h2>
 
+        {/* CARDS */}
         <div className="grid md:grid-cols-2 gap-8">
 
           {/* OPTION A */}
           <button
-            onClick={() => handleChoice(question.optionA.name)}
-            className={`rounded-3xl overflow-hidden border transition-all duration-300 ${
-              selected === question.optionA.name
-                ? isCorrect
+            onClick={() => handleChoice(battle.optionA)}
+            className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
+              selected === battle.optionA
+                ? correct
                   ? "border-green-500 scale-105"
                   : "border-red-500 scale-95"
                 : "border-white/10 hover:border-yellow-500"
             }`}
           >
 
-            <div className="relative h-[400px]">
+            <div className="relative h-[450px]">
 
-              <Image
-                src={question.optionA.image}
-                alt={question.optionA.name}
-                fill
-                className="object-cover"
+              <img
+                src={`https://source.unsplash.com/featured/800x800/?${battle.optionA}`}
+                alt={battle.optionA}
+                className="w-full h-full object-cover"
               />
 
             </div>
 
-            <div className="p-6 text-center text-2xl font-bold bg-zinc-900">
-              {question.optionA.name}
+            <div className="bg-zinc-900 p-6 text-center text-3xl font-bold">
+              {battle.optionA}
             </div>
 
           </button>
 
           {/* OPTION B */}
           <button
-            onClick={() => handleChoice(question.optionB.name)}
-            className={`rounded-3xl overflow-hidden border transition-all duration-300 ${
-              selected === question.optionB.name
-                ? isCorrect
+            onClick={() => handleChoice(battle.optionB)}
+            className={`overflow-hidden rounded-3xl border transition-all duration-300 ${
+              selected === battle.optionB
+                ? correct
                   ? "border-green-500 scale-105"
                   : "border-red-500 scale-95"
                 : "border-white/10 hover:border-yellow-500"
             }`}
           >
 
-            <div className="relative h-[400px]">
+            <div className="relative h-[450px]">
 
-              <Image
-                src={question.optionB.image}
-                alt={question.optionB.name}
-                fill
-                className="object-cover"
+              <img
+                src={`https://source.unsplash.com/featured/800x800/?${battle.optionB}`}
+                alt={battle.optionB}
+                className="w-full h-full object-cover"
               />
 
             </div>
 
-            <div className="p-6 text-center text-2xl font-bold bg-zinc-900">
-              {question.optionB.name}
+            <div className="bg-zinc-900 p-6 text-center text-3xl font-bold">
+              {battle.optionB}
             </div>
 
           </button>
 
         </div>
 
+        {/* FOOTER */}
         <p className="text-center text-zinc-500 mt-8">
           Choose wisely 😈
         </p>
 
       </div>
-
     </main>
   );
 }
