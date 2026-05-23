@@ -11,35 +11,10 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7 }}
       className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10"
-    ><div className="flex gap-8 text-sm font-semibold">
-
-  <Link href="/">
-    <span className="hover:text-yellow-400 transition">
-      HOME
-    </span>
-  </Link>
-
-  <Link href="/videos">
-    <span className="hover:text-yellow-400 transition">
-      VIDEOS
-    </span>
-  </Link>
-
-  <Link href="/community">
-    <span className="hover:text-yellow-400 transition">
-      COMMUNITY
-    </span>
-  </Link>
-
-  <Link href="/interactives">
-    <span className="hover:text-yellow-400 transition">
-      INTERACTIVES
-    </span>
-  </Link>
-
-</div>
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
+        {/* LOGO */}
         <div className="flex items-center gap-3">
 
           <div className="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center font-bold text-black">
@@ -47,7 +22,7 @@ export default function Navbar() {
           </div>
 
           <div>
-            <h1 className="text-2xl leading-none">
+            <h1 className="text-2xl leading-none font-bold">
               TRICOKID
             </h1>
 
@@ -58,26 +33,36 @@ export default function Navbar() {
 
         </div>
 
-        <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-wider">
+        {/* NAV LINKS */}
+        <div className="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-wider">
 
-          <a href="#" className="hover:text-yellow-500 transition">
-            Home
-          </a>
+          <Link href="/">
+            <span className="hover:text-yellow-400 transition cursor-pointer">
+              HOME
+            </span>
+          </Link>
 
-          <a href="#" className="hover:text-yellow-500 transition">
-            Videos
-          </a>
+          <Link href="/videos">
+            <span className="hover:text-yellow-400 transition cursor-pointer">
+              VIDEOS
+            </span>
+          </Link>
 
-          <a href="#" className="hover:text-yellow-500 transition">
-            Community
-          </a>
+          <Link href="/community">
+            <span className="hover:text-yellow-400 transition cursor-pointer">
+              COMMUNITY
+            </span>
+          </Link>
 
-          <a href="#" className="hover:text-yellow-500 transition">
-            Interactives
-          </a>
+          <Link href="/interactives">
+            <span className="hover:text-yellow-400 transition cursor-pointer">
+              INTERACTIVES
+            </span>
+          </Link>
 
         </div>
 
+        {/* SOCIALS */}
         <div className="flex items-center gap-4 text-lg">
 
           <a
